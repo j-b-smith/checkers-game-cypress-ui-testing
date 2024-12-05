@@ -1,0 +1,53 @@
+name: Cypress Tests
+
+on:
+  # Run tests on Pull Requests
+  pull_request:
+    branches:
+      - main
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      testType:
+        description: "Which tests to run (positive, negative, all)"
+        required: false
+        default: "all"
+
+jobs:
+  cypress-tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        test-type: ["positive", "negative", "all"]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Cypress Tests
+      env:
+        CI: true
+      run: |
+        case "${{ matrix.test-type }}" in
+          positive)
+            npm run cypress:run:positive
+            ;;
+          negative)
+            npm run cypress:run:negative
+            ;;
+          all)
+            npm run cypress:run:all
+            ;;
+          *)
+            echo "Invalid test type"; exit 1
+            ;;
+        esac
