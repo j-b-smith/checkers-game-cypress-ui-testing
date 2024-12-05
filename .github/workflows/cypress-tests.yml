@@ -18,46 +18,6 @@ on:
       - main
 
 jobs:
-  positive-tests:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.testType == 'all' || github.event.inputs.testType == 'positive' || github.event_name == 'push' }}
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run Positive Cypress Tests
-      env:
-        CI: true
-      run: npm run cypress:run:positive
-
-  negative-tests:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.testType == 'all' || github.event.inputs.testType == 'negative' || github.event_name == 'push' }}
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Run Negative Cypress Tests
-      env:
-        CI: true
-      run: npm run cypress:run:negative
-
   all-tests:
     runs-on: ubuntu-latest
     if: ${{ github.event.inputs.testType == 'all' || github.event_name == 'push' }}
