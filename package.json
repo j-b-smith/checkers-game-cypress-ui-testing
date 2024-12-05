@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "cypress:run:positive": "cypress run --spec 'cypress/e2e/positiveScenarios.cy.ts'",
-    "cypress:run:negative": "cypress run --spec 'cypress/e2e/negativeScenarios.cy.ts'",
+    "cypress:run:positive": "cypress run --spec 'cypress/e2e/checkersPositiveScenarios.cy.ts'",
+    "cypress:run:negative": "cypress run --spec 'cypress/e2e/checkersNegativeScenarios.cy.ts'",
     "cypress:run:all": "cypress run"
   },
   "keywords": [],
