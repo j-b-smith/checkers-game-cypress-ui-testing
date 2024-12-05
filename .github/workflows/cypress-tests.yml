@@ -12,6 +12,10 @@ on:
         description: "Which tests to run (positive, negative, all)"
         required: false
         default: "all"
+  # Run all tests on any merge to main
+  push:
+    branches:
+      - main
 
 jobs:
   cypress-tests:
